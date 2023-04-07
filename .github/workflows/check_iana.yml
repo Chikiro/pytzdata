@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: run curl
-        run: curl -I https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz.asc
+        run: if [ "$(curl -s -I -o /dev/null -w '%{http_code}' https://data.iana.org/time-zones/releases/tzdata2023d.tar.gz.asc)" -eq '200' ]; then false; else true; fi;

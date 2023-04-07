@@ -12,10 +12,5 @@ jobs:
     steps:
       - name: run curl
         run: if [ "$(curl -s -I -o /dev/null -w '%{http_code}' https://data.iana.org/time-zones/releases/tzdata2023d.tar.gz.asc)" -eq '200' ]; then false; else true; fi;
-      - name: notify via telegram about new tzdata
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ env.TG_NOTIFY_CHAT_ID }}
-          token: ${{ secrets.TG_BOT_KEY }}
-          message: New tzdata detected
-          debug: true
+      - name: notify via telegram about new tz data
+        run: curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_KEY }}/sendMessage" -d chat_id=${{ env.TG_NOTIFY_CHAT_ID }} -d text="Hello World"

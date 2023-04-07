@@ -1,9 +1,8 @@
 name: "Check new tz data on iana site"
-#on:
-#  schedule:
-#  - cron: "*/2 * * * *"
+on:
+  schedule:
+  - cron: "45 * * * *"
 
-on: workflow_dispatch
 
 jobs:
   check_iana:

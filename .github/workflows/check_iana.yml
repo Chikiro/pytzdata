@@ -18,3 +18,4 @@ jobs:
           to: ${{ env.TG_NOTIFY_CHAT_ID }}
           token: ${{ secrets.TG_BOT_KEY }}
           message: New tzdata detected
+          debug: true

@@ -1,0 +1,13 @@
+name: "Check new tz data on iana site"
+on:
+  schedule:
+  - cron: "*/2 * * * *"
+
+jobs:
+  check_iana:
+    name: Check url response
+    runs-on: ubuntu-latest
+    steps:
+      - name: run curl
+        run: curl -I https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz.asc
+        

@@ -1,7 +1,9 @@
 name: "Check new tz data on iana site"
-on:
-  schedule:
-  - cron: "*/2 * * * *"
+#on:
+#  schedule:
+#  - cron: "*/2 * * * *"
+
+on: workflow_dispatch
 
 jobs:
   check_iana:
@@ -10,4 +12,3 @@ jobs:
     steps:
       - name: run curl
         run: curl -I https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz.asc
-        

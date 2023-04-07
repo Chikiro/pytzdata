@@ -3,7 +3,6 @@ on:
   schedule:
   - cron: "45 * * * *"
 
-
 jobs:
   check_iana:
     name: Check url response

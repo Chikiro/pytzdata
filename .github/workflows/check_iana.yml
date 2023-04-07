@@ -11,4 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: run curl
-        run: if [ "$(curl -s -I -o /dev/null -w '%{http_code}' https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz.asc)" -eq '200' ]; then false; else true; fi;
+        run: if [ "$(curl -s -I -o /dev/null -w '%{http_code}' https://data.iana.org/time-zones/releases/tzdata2023d.tar.gz.asc)" -eq '200' ]; then false; else true; fi;
+      - name: notify via telegram about new tzdata
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ env.TG_NOTIFY_CHAT_ID }}
+          token: ${{ secrets.TG_BOT_KEY }}
+          message: New tzdata detected

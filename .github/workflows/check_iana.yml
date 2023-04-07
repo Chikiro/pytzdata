@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: run curl
-        run: if [ "$(curl -s -I -o /dev/null -w '%{http_code}' https://data.iana.org/time-zones/releases/tzdata2023d.tar.gz.asc)" -eq '200' ]; then false; else true; fi;
+        run: echo "IANA_HTTP_CODE=$(curl -s -I -o /dev/null -w '%{http_code}' https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz.asc)" >> $GITHUB_ENV
       - name: notify via telegram about new tz data
         run: curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_KEY }}/sendMessage" -d chat_id=${{ vars.TG_NOTIFY_CHAT_ID }} -d text="New tzdata version detected" -d disable_notification="false"
+        if: ${{ env.IANA_HTTP_CODE == '200' }}
